@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "spinlock.h": "c",
+        "proc.h": "c",
+        "defs.h": "c",
+        "fs.h": "c",
+        "user.h": "c",
+        "types.h": "c"
+    }
+}
