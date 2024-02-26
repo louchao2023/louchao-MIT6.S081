@@ -276,6 +276,8 @@ fork(void)
   np->sz = p->sz;
 
   np->parent = p;
+  //trace添加
+  np->mask = p->mask;
 
   // copy saved user registers.
   *(np->trapframe) = *(p->trapframe);
@@ -693,3 +695,21 @@ procdump(void)
     printf("\n");
   }
 }
+//sysinfo添加
+uint64
+nproc(void)
+{
+  struct proc *p;
+  uint64 num = 0;
+  for (p = proc; p < &proc[NPROC]; p++)
+  {
+    acquire(&p->lock);
+    if (p->state != UNUSED)
+    {
+      num++;
+    }
+    release(&p->lock);
+  }
+  return num;
+}
+
