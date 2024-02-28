@@ -86,8 +86,11 @@ void usertrap(void)
     {
       if (p->interval == p->total_ticks)
       {
-        p->total_ticks = 0;
-        p->trapframe->epc = p->handler;
+        /* p->total_ticks = 0;
+        p->trapframe->epc = p->handler; */
+        p->trapframecopy = p->trapframe + 512;  
+        memmove(p->trapframecopy,p->trapframe,sizeof(struct trapframe)); 
+        p->trapframe->epc = (uint64)p->handler;
       }
       p->total_ticks++;
       // 结束
