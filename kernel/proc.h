@@ -107,5 +107,6 @@ struct proc {
   int interval;
   uint64 handler;
   int total_ticks;
+  struct trapframe* trapframecopy; 
   //结束
 };
