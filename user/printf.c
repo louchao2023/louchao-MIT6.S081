@@ -135,17 +135,3 @@ void printf(const char *fmt, ...)
   va_start(ap, fmt);
   vprintf(1, fmt, ap);
 }
-// 添加
-void 
-backtrace(void)
-{
-  printf("backtrace:\n");
-  uint64 fp = r_fp();
-  printf("%p\n", fp);
-  while (PGROUNDUP(fp) - PGROUNDDOWN(fp) == PGSIZE)
-  {
-    uint64 ra = *(uint64*)(fp-8);
-    printf("%p\n", ra);
-    fp = *(uint64*)(fp-16);
-  }
-}
