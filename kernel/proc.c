@@ -106,6 +106,12 @@ allocproc(void)
 
 found:
   p->pid = allocpid();
+  
+  //添加
+  p->total_ticks=0;
+  p->handler=0;
+  p->interval=0;
+  //结束
 
   // Allocate a trapframe page.
   if((p->trapframe = (struct trapframe *)kalloc()) == 0){
