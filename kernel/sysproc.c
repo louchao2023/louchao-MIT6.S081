@@ -115,6 +115,13 @@ sys_sigalarm(void)
 uint64
 sys_sigreturn(void)
 {
-  return 0;
+   struct proc* p = myproc();
+    if(p->trapframecopy != p->trapframe + 512) {
+        return -1;
+    }
+    memmove(p->trapframe, p->trapframecopy, sizeof(struct trapframe));   
+    p->total_ticks = 0;     
+    p->trapframecopy = 0;    // 置零
+    return 0;
 }
 //结束
